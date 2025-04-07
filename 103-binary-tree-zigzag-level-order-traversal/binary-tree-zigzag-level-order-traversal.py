@@ -22,8 +22,10 @@ class Solution:
                 if node.right:
                     q.append(node.right)
             if zigzag:
-                temp = temp[::-1]
+                res.append(temp[::-1])
+            else :
+                res.append(temp)
             zigzag = not zigzag
-            res.append(temp)
+            
         return res
                 
