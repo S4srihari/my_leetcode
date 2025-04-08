@@ -10,6 +10,6 @@ class Solution:
         seen = set()
         for i in range(len(nums)-1,-1,-1):
             if nums[i] in seen:
-                return (i+1)//3 if (i+1)%3 == 0 else (i+1)//3 + 1
+                return i//3 + 1
             seen.add(nums[i])
         return 0
