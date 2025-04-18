@@ -3,7 +3,8 @@ class Solution:
         max_volume = 0
         l,r = 0, len(height)-1
         while l < r:
-            volume = min(height[l],height[r]) * (r-l)
+            h = min(height[l],height[r])
+            volume = h * (r-l)
             max_volume = max(volume, max_volume)
             if height[l] <= height[r]:
                 l += 1
