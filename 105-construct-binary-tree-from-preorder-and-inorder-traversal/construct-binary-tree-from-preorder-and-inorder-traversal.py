@@ -10,9 +10,9 @@ class Solution:
             if not pre or not ino:
                 return None
             l_size = ino.index(pre[0])
-            temp = TreeNode(pre.pop(0))
-            temp.left = tree(pre[:l_size],ino[:l_size])
-            temp.right = tree(pre[l_size:],ino[l_size+1:])
-            return temp
+            root = TreeNode(pre.pop(0))
+            root.left = tree(pre[:l_size],ino[:l_size])
+            root.right = tree(pre[l_size:],ino[l_size+1:])
+            return root
         
         return tree(preorder,inorder)
