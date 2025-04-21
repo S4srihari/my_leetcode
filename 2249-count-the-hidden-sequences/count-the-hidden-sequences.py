@@ -1,0 +1,14 @@
+class Solution:
+    def numberOfArrays(self, differences: List[int], lower: int, upper: int) -> int:
+        low, high = 0, 0
+        tot = 0
+        for diff in differences:
+            tot += diff
+            if tot < low:
+                low = tot
+            if tot > high:
+                high = tot
+        if low == high:
+            high = 0
+        posseq = (upper-lower) - (high-low) + 1
+        return max(0,posseq)
