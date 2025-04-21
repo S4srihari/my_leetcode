@@ -9,4 +9,7 @@ class Solution:
             if tot > high:
                 high = tot
         posseq = (upper-lower) - (high-low) + 1
-        return max(0,posseq)
+        if posseq > 0:
+            return posseq
+        else :
+            return 0
