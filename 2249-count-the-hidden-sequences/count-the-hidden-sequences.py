@@ -8,7 +8,5 @@ class Solution:
                 low = tot
             if tot > high:
                 high = tot
-        if low == high:
-            high = 0
         posseq = (upper-lower) - (high-low) + 1
         return max(0,posseq)
