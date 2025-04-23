@@ -9,5 +9,4 @@ class Solution:
             else :
                 m = 1
                 l += (c[i]-1)
-        
         return l + m
