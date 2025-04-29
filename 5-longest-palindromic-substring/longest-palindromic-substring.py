@@ -25,9 +25,9 @@ class Solution:
 
             if maxi > max_len :
                 max_len = maxi
-                diff = maxi//2
+                exp = maxi//2
                 if maxi % 2 != 0:
-                    ans = s[i-diff:i+diff+1]
+                    ans = s[i-exp:i+exp+1]
                 else :
-                    ans = s[i-diff+1:i+diff+1]
+                    ans = s[i-exp+1:i+exp+1]
         return ans
