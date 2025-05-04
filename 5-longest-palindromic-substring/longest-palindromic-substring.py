@@ -21,13 +21,8 @@ class Solution:
             odd = expanding(s,i,i)
             even = expanding(s,i,i+1)
             maxi = max(odd,even)
-            print(maxi)
 
             if maxi > max_len :
                 max_len = maxi
-                exp = maxi//2
-                if maxi % 2 != 0:
-                    ans = s[i-exp:i+exp+1]
-                else :
-                    ans = s[i-exp+1:i+exp+1]
+                ans = s[i-(max_len - 1)//2 : i+ max_len//2 + 1]
         return ans
