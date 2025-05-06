@@ -8,7 +8,7 @@ class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
         
         def tree(ino,pos):
-            if not ino or not pos:
+            if not ino:
                 return None
             val = pos.pop()
             root = TreeNode(val)
