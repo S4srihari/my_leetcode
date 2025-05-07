@@ -3,10 +3,10 @@ class Solution:
         m = len(grid)
         n = len(grid[0])
         visited = set()
+
         def bfs(r,c):
             q = deque([(r,c)])
             visited.add((r,c))
-
             while q:
                 cr,cc = q.popleft()
                 if cc+ 1 < n and grid[cr][cc+1]=="1" and (cr,cc+1) not in visited:
