@@ -1,6 +1,6 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        left, right = 0,0
+        left=0
         dic = set()
         substr, long_substr = 0, 0
         for right in range(len(s)):
