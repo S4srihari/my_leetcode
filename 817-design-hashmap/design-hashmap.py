@@ -10,8 +10,7 @@ class MyHashMap:
         return self.d[key] if key in self.d else -1
 
     def remove(self, key: int) -> None:
-        if key in self.d:
-            self.d.pop(key)
+        self.d.pop(key,None)
 
 
 # Your MyHashMap object will be instantiated and called as such:
