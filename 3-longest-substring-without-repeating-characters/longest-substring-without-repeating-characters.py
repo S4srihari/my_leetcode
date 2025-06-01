@@ -9,8 +9,8 @@ class Solution:
                 substr = right - left + 1
                 long_substr = max(substr, long_substr)
                 continue
-            while s[right] in dic:
+            while s[right] != s[left]:
                 dic.remove(s[left])
                 left += 1
-            dic.add(s[right])
+            left += 1
         return long_substr
