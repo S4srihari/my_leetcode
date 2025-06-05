@@ -1,20 +1,25 @@
 class MyQueue:
 
     def __init__(self):
-        self.lis = []
-
+        self.add = []
+        self.rem = []
 
     def push(self, x: int) -> None:
-        self.lis.append(x)
+        self.add.append(x)
 
     def pop(self) -> int:
-        return self.lis.pop(0)
+        while self.add:
+            self.rem.append(self.add.pop())
+        res = self.rem.pop()
+        while self.rem:
+            self.add.append(self.rem.pop())
+        return res
 
     def peek(self) -> int:
-        return self.lis[0]
+        return self.add[0]
 
     def empty(self) -> bool:
-        return False if self.lis else True
+        return False if self.add else True
 
 
 # Your MyQueue object will be instantiated and called as such:
