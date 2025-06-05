@@ -2,10 +2,10 @@ class Solution:
     def answerString(self, word: str, numFriends: int) -> str:
         if numFriends == 1:
             return word
+        n = len(word)
+        l_len = n - numFriends + 1
         res = ""
-        length = len(word) - numFriends + 1
-        for i in range(0, len(word)):
-            temp = word[i : i + length]
-            if temp > res:
-                res = temp
+        for i in range(n):
+            if  word[i:i+l_len] > res:
+                res = word[i:i+l_len]  
         return res
