@@ -1,6 +1,6 @@
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
-        """s_hash = defaultdict(int)
+        s_hash = defaultdict(int)
         t_hash = defaultdict(int)
         for idx in range(len(s)):
             if s[idx] not in s_hash:
@@ -11,6 +11,6 @@ class Solution:
             
             if s_hash[s[idx]] != t_hash[t[idx]]:
                 return False
-        return True"""
+        return True
 
-        return len(set(s)) == len(set(t)) == len(set(zip(s,t)))
+        #return len(set(s)) == len(set(t)) == len(set(zip(s,t)))
