@@ -1,14 +1,12 @@
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
-        n_hash = defaultdict(list)
+        n_hash = {0:-1}
         ans = 0
         cursum = 0
         for idx in range(len(nums)):
             cursum += 1 if nums[idx] == 1 else -1
-            n_hash[cursum].append(idx)
-            if cursum == 0:
-                ans = max(ans,idx+1)
-            elif len(n_hash[cursum]) >= 2:
-                ans = max(ans,n_hash[cursum][-1] - n_hash[cursum][0])
+            if cursum not in n_hash:
+                n_hash[cursum] = idx
+            ans = max(ans, idx -  n_hash[cursum])
 
         return ans
