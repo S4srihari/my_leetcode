@@ -7,10 +7,8 @@ class Solution:
         dic[0] = 1
         for i in range(n):
             temp += nums[i]
-
             if temp - k in dic:
                 ans += dic[temp - k]
-
             if temp not in dic:
                 dic[temp] = 1
             else :
