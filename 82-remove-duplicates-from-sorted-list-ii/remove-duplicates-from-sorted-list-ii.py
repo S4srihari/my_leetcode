@@ -12,11 +12,9 @@ class Solution:
             if head.val != head.next.val and head.val != cur:
                 temp.next = ListNode(head.val)
                 temp = temp.next
-                cur = head.val
-                head = head.next
-            else :
-                cur = head.val
-                head = head.next
+            cur = head.val
+            head = head.next
+            
         if head and head.val != cur:
             temp.next = ListNode(head.val)
             temp = temp.next
