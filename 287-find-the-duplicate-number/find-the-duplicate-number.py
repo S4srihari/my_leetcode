@@ -6,8 +6,8 @@ class Solution:
                 return nums[idx]"""
         n = len(nums)
         k = [0]*n
-        for idx in range(n):
-            if k[nums[idx]] == 0:
-                k[nums[idx]] = 1
-            else :
-                return nums[idx]
+        for num in nums:
+            if k[num] == 1:
+                return num
+            k[num] = 1
+                
