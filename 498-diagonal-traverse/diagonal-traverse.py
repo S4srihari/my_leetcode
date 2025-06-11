@@ -1,6 +1,6 @@
 class Solution:
     def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
-        res = defaultdict(list)
+        freq = defaultdict(list)
         m,n = len(mat), len(mat[0])
         """rev = False
         for idx_sum in range(m+n-1):    
@@ -15,8 +15,8 @@ class Solution:
             rev = not rev"""
         for i in range(m):
             for j in range(n):
-                res[i+j].append(mat[i][j])
+                freq[i+j].append(mat[i][j])
         ans = []
         for i in range(m+n-1):
-            ans.extend(res[i] if i%2!=0 else res[i][::-1])
+            ans.extend(freq[i] if i%2!=0 else freq[i][::-1])
         return ans
