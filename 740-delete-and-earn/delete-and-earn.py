@@ -1,9 +1,7 @@
 class Solution:
     def deleteAndEarn(self, nums: List[int]) -> int:
-        if not nums:
-            return
         c = Counter(nums)
-        l = sorted([(k, k*v) for k,v in c.items()], key = lambda x : x[0])
+        l = sorted([(k, k*v) for k,v in c.items()])
         if len(l) < 2:
             return l[0][1]
         prev, prev2 = l[0][1],0
