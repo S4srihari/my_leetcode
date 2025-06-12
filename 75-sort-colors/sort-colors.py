@@ -14,7 +14,7 @@ class Solution:
         
         n = len(nums)
         left, right,i = 0,n-1,0
-        while i < n:
+        while i <= right:
             if nums[i] == 1:
                 i += 1
             elif nums[i] == 0:
@@ -22,8 +22,5 @@ class Solution:
                 left += 1
                 i += 1
             else:
-                if i < right:
-                    nums[right],nums[i] = nums[i],nums[right]
-                    right -= 1
-                else :
-                    break
+                nums[right],nums[i] = nums[i],nums[right]
+                right -= 1
