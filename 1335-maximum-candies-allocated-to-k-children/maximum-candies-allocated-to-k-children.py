@@ -8,7 +8,6 @@ class Solution:
             cnt = 0
             for i in candies:
                 cnt += i//mid
-            print(left,right,cnt)
             if cnt < k:
                 right = mid-1
             elif cnt >= k:
