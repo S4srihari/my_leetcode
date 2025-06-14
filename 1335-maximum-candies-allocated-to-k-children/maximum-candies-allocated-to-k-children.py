@@ -5,9 +5,7 @@ class Solution:
             return 0
         while left <= right:
             mid = left + (right-left)//2
-            cnt = 0
-            for i in candies:
-                cnt += i//mid
+            cnt = sum([i//mid for i in candies])
             if cnt < k:
                 right = mid-1
             elif cnt >= k:
