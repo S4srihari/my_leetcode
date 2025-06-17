@@ -1,18 +1,19 @@
 class Solution:
     def subset_sum(self,target, arr):
-        dp = [[0]*(target+1) for _ in range(len(arr))]
-        for i in range(len(arr)):
-            dp[i][0] = True
+        prev = [True] + [0]*(target)
         if arr[0] > target: return False
-        dp[0][arr[0]] = True 
+        prev[arr[0]] = True 
         for idx in range(1,len(arr)):
+            cur =  [True] + [0]*(target)
             for t in range(target+1):
-                not_take = dp[idx-1][t]
+                not_take = prev[t]
                 take = False
                 if t >= arr[idx]:
-                    take = dp[idx-1][t-arr[idx]]
-                dp[idx][t] = take or not_take 
-        return dp[len(arr)-1][target] is True
+                    take = prev[t-arr[idx]]
+                cur[t] = take or not_take 
+            prev = cur
+
+        return prev[target] is True
 
     def canPartition(self, nums: List[int]) -> bool:
         total_sum = sum(nums)
