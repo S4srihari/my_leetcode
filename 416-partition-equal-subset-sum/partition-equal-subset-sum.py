@@ -11,6 +11,8 @@ class Solution:
                 if t >= arr[idx]:
                     take = prev[t-arr[idx]]
                 cur[t] = take or not_take 
+                if cur[target] == True:
+                    return True
             prev = cur
 
         return prev[target] is True
