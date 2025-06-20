@@ -8,13 +8,13 @@ class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
         ans = []
         def tree(node,s):
-            value = node.val
-            s += str(value)
+            s *= 10
+            s += node.val
             if not node.left and not node.right:
                 ans.append(s)
                 return
             if node.left: tree(node.left,s)
             if node.right: tree(node.right,s)
             return
-        tree(root,"")
-        return sum([int(i) for i in ans])
+        tree(root,0)
+        return sum(ans)
