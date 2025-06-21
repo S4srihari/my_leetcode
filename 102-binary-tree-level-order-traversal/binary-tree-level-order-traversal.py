@@ -9,13 +9,13 @@ class Solution:
         ans, q = [], []
         if not root : return ans
         q.append(root)
-        while q:
-            l = len(q)
-            temp = []
-            for i in range(l):
+        while q: # while q is not Empty
+            q_len = len(q)
+            level = []
+            for i in range(q_len):
                 node = q.pop(0)
-                temp.append(node.val)
+                level.append(node.val)
                 if node.left: q.append(node.left)
                 if node.right: q.append(node.right)
-            ans.append(temp)
+            ans.append(level)
         return ans
