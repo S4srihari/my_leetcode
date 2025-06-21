@@ -6,7 +6,7 @@
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        hash_set = set()
+        """hash_set = set()
         while headA and headB:
             if headA in hash_set:
                 return  headA
@@ -27,4 +27,11 @@ class Solution:
             if headB in hash_set:
                 return headB
             hash_set.add(headB)
-            headB = headB.next
+            headB = headB.next"""
+
+        #follow up
+        tempA, tempB = headA, headB
+        while tempA != tempB:
+            tempA = tempA.next if tempA is not None else headB
+            tempB = tempB.next if tempB is not None else headA
+        return tempA
