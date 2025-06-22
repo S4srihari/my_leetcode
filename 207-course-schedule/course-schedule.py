@@ -33,8 +33,8 @@ class Solution:
         return True"""
 
         adj_lis = defaultdict(list)
-        for pre in prerequisites :
-            adj_lis[pre[0]].append(pre[1])
+        for c,p in prerequisites :
+            adj_lis[c].append(p)
 
         visited = set()
         path = set()
