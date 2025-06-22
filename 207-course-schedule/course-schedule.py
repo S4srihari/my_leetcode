@@ -54,6 +54,6 @@ class Solution:
                 return True
         
         for course in range(numCourses):
-            if not dfs(course,path):
+            if course not in visited and not dfs(course,path):
                 return False
         return True
