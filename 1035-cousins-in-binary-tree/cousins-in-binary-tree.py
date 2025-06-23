@@ -27,8 +27,6 @@ class Solution:
                         depths.append([node.val,cur_depth])
                     q.append(node.right)
             
-
-        print(depths)
         if len(depths) == 2:
             return True if depths[0][1] == depths[1][1] and depths[0][0] != depths[1][0] else False
         else :
