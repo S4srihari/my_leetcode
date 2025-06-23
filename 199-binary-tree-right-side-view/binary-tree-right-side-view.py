@@ -11,12 +11,10 @@ class Solution:
         q = []
         q.append(root)
         while q:
-            temp = []
+            ans.append(q[0].val)
             n = len(q)
             for i in range(n):
                 node = q.pop(0)
-                temp.append(node.val)
                 if node.right: q.append(node.right)
                 if node.left: q.append(node.left)
-            ans.append(temp[0])
         return ans
