@@ -9,8 +9,8 @@ class Employee:
 
 class Solution:
     def getImportance(self, employees: List['Employee'], id: int) -> int:
-        total = 0
-        visited = set()
+        # Breadth first search
+        """total = 0
         q = []
         q.append(id)
         while q:
@@ -20,4 +20,12 @@ class Solution:
                     total += i.importance
                     for j in i.subordinates:
                         q.append(j)
-        return total            
+        return total"""       
+
+        # Depth first search
+        d = {emp.id : emp for emp in employees}
+        def dfs(emp):
+            imp = emp.importance
+            imp += sum([dfs(d[e]) for e in emp.subordinates]) 
+            return imp    
+        return dfs(d[id])
