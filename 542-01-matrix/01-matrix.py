@@ -13,9 +13,9 @@ class Solution:
                     visited.add((i,j))
         while q:
             x,y = q.pop(0)
-            visited.add((x,y))
             for i,j in [(x-1,y),(x+1,y),(x,y-1),(x,y+1)]:
                 if 0 <= i < m and 0 <= j < n and (i,j) not in visited:
                     ans[i][j] = min(ans[i][j], 1+ans[x][y])
                     q.append((i,j))
+                    visited.add((i,j))
         return ans
