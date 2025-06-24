@@ -10,6 +10,7 @@ class Solution:
                 if mat[i][j] == 0:
                     ans[i][j] = 0
                     q.append((i,j))
+                    visited.add((i,j))
         while q:
             x,y = q.pop(0)
             visited.add((x,y))
