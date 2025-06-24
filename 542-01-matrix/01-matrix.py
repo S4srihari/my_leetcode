@@ -1,0 +1,20 @@
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        if not mat : return []
+        m,n = len(mat), len(mat[0])
+        ans = [[float('inf')]*n for _ in range(m)]
+        q = []
+        visited = set()
+        for i in range(m):
+            for j in range(n):
+                if mat[i][j] == 0:
+                    ans[i][j] = 0
+                    q.append((i,j))
+        while q:
+            x,y = q.pop(0)
+            visited.add((x,y))
+            for i,j in [(x-1,y),(x+1,y),(x,y-1),(x,y+1)]:
+                if 0 <= i < m and 0 <= j < n:
+                    ans[i][j] = min(ans[i][j], 1+ans[x][y])
+                    if (i,j) not in visited: q.append((i,j))
+        return ans
