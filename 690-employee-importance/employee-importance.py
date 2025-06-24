@@ -26,6 +26,7 @@ class Solution:
         d = {emp.id : emp for emp in employees}
         def dfs(emp):
             imp = emp.importance
-            imp += sum([dfs(d[e]) for e in emp.subordinates]) 
+            for e in emp.subordinates:
+                imp += dfs(d[e]) 
             return imp    
         return dfs(d[id])
