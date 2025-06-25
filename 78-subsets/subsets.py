@@ -9,6 +9,7 @@ class Solution:
                 curr.append(nums[i])
                 recurse(i+1, curr, nums)
                 curr.pop()
+            return
         
         recurse(0,[],nums)
         return output
