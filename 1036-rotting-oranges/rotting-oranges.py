@@ -1,14 +1,12 @@
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        minutes = 0
+        minutes, cnt_fresh = 0, 0
         m,n = len(grid), len(grid[0])
-        cnt_fresh = 0 
         rotten_q = deque()
         for i in range(m):
             for j in range(n):
                 if grid[i][j] == 1: cnt_fresh += 1
-                if grid[i][j] == 2: 
-                    rotten_q.append((i,j))
+                elif grid[i][j] == 2: rotten_q.append((i,j))
         if cnt_fresh == 0 : return 0
 
         while rotten_q:
