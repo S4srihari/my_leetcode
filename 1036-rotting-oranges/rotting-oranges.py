@@ -20,7 +20,6 @@ class Solution:
                         rotten_q.append((x,y))
                         cnt_fresh -= 1
 
-                if cnt_fresh == 0:
-                    return minutes
-
         if cnt_fresh : return -1
+        else :
+            return minutes - 1
