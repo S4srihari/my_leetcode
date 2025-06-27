@@ -4,7 +4,6 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         k %= len(nums)
-        for _ in range(k):
-            last_ele = nums.pop()
-            nums.insert(0,last_ele)
-        
+        temp = nums[-k:] + nums[:-k]
+        for idx in range(len(nums)):
+            nums[idx] = temp[idx]
