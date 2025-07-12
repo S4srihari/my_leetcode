@@ -4,9 +4,10 @@ class Solution:
         pair = [(p,s) for p,s in zip(position,speed)]
         pair.sort(reverse = True)
         stack = []
+        prev = 0
         for p,s in pair:
             time = (target - p)/s
-            if not stack or stack[-1] < time:
+            if prev < time:
                 fleets += 1
-                stack.append(time)
+                prev = time
         return fleets 
