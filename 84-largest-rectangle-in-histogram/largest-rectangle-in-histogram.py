@@ -12,16 +12,13 @@ class Solution:
         n = len(heights)
         stack = []
         for idx in range(n):
-            if not stack or stack[-1][0] < heights[idx]:
-                stack.append((heights[idx], idx))
-            else :
-                start = idx
-                while stack and stack[-1][0] > heights[idx]:
-                    height, left = stack.pop()
-                    area = (idx - left)*height 
-                    max_area = max(area, max_area)
-                    start = left
-                stack.append((heights[idx], start))
+            start = idx
+            while stack and stack[-1][0] > heights[idx]:
+                height, left = stack.pop()
+                area = (idx - left)*height 
+                max_area = max(area, max_area)
+                start = left
+            stack.append((heights[idx], start))
                 
             
         while stack:
