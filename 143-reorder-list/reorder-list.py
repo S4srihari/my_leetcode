@@ -9,23 +9,22 @@ class Solution:
         Do not return anything, modify head in-place instead.
         """
         if not head : return None
-        prev = cur = None
-        size = 0
-        temp = head
+        fast,slow = head,head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        temp = slow.next
+        slow.next = None
+        rev = None
         while temp:
-            size += 1
-            cur = ListNode(temp.val)
-            cur.next = prev
-            prev = cur
-            temp = temp.next
-        temp = head.next
-        for i in range(1,size):
-            if i%2 == 1:
-                head.next = prev
-                head = head.next
-                prev = prev.next
-            else :
-                head.next = temp
-                temp = temp.next
-                head = head.next
-        head.next = None
+            cur = temp.next
+            temp.next = rev
+            rev = temp
+            temp = cur
+        
+        front = head
+        while rev:
+            tmp1,tmp2 = front.next,rev.next
+            front.next = rev
+            rev.next = tmp1
+            front, rev = tmp1, tmp2
