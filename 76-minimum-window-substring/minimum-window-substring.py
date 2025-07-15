@@ -1,32 +1,29 @@
 class Solution:
+    def substr(self, f1, f2):
+        for key, val in f1.items():
+            if f2[key] < val:
+                return False
+        return True
+        
     def minWindow(self, s: str, t: str) -> str:
-        if len(s) < len(t):
+        m, n = len(s), len(t)
+        if n > m:
             return ""
-        chars = {}
-        for char in t:
-            chars[char] = chars.get(char,0) + 1
-
-        chars_rem = len(t)
-        l = 0
-        min_window = (0, float("inf"))
-        for idx, char in enumerate(s):
-            if char in chars and chars[char] > 0:
-                chars_rem -= 1
-            chars[char] = chars.get(char,0) - 1
-
-            if chars_rem == 0:
-                while True:
-                    char = s[l]
-                    if chars[char] == 0:
-                        break
-                    chars[char] += 1
-                    l += 1
-                
-                if idx - l < min_window[1] - min_window[0]:
-                    min_window = (l,idx)
-                
-                chars[s[l]] += 1
-                l += 1
-                chars_rem += 1
-
-        return "" if min_window[1] > len(s) else "".join(s[min_window[0]:min_window[1]+1])
+        freq, freq2 = defaultdict(int), defaultdict(int)
+        for idx in range(n):
+            freq[t[idx]] += 1
+            freq2[s[idx]] += 1
+        if self.substr(freq,freq2):
+            return s[:n]
+        left,right = 0,n
+        ans = ""
+        while right < m :
+            freq2[s[right]] += 1
+            if self.substr(freq,freq2):
+                while self.substr(freq,freq2):
+                    freq2[s[left]] -= 1
+                    left += 1
+                if len(ans) >= right - left + 2 or ans == "":
+                    ans = s[left-1:right+1]
+            right += 1
+        return ans
