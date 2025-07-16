@@ -11,6 +11,10 @@ class Solution:
         return topK"""
 
         c = Counter(nums)
-        top = c.most_common()
-        topk = [k for k,v in top[:k]]
+        top = [(-val,key) for key,val in c.items()]
+        heapq.heapify(top)
+        topk = []
+        for _ in range(k):
+            val,key = heapq.heappop(top)
+            topk.append(key)
         return topk
