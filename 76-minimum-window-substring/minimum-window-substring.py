@@ -1,29 +1,28 @@
 class Solution:
-    def substr(self, f1, f2):
-        for key, val in f1.items():
-            if f2[key] < val:
-                return False
-        return True
-        
     def minWindow(self, s: str, t: str) -> str:
         m, n = len(s), len(t)
         if n > m:
             return ""
-        freq, freq2 = defaultdict(int), defaultdict(int)
+        freq = defaultdict(int)
         for idx in range(n):
             freq[t[idx]] += 1
-            freq2[s[idx]] += 1
-        if self.substr(freq,freq2):
-            return s[:n]
-        left,right = 0,n
-        ans = ""
-        while right < m :
-            freq2[s[right]] += 1
-            if self.substr(freq,freq2):
-                while self.substr(freq,freq2):
-                    freq2[s[left]] -= 1
+        chars_rem = n
+        left = 0
+        ans = [0,float("inf")]
+        for right, char in enumerate(s):
+            if char in freq and freq[char] > 0:
+                chars_rem -= 1
+            freq[char] -= 1
+            if chars_rem == 0:
+                while True:
+                    if freq[s[left]] == 0:
+                        break
+                    freq[s[left]] += 1
                     left += 1
-                if len(ans) >= right - left + 2 or ans == "":
-                    ans = s[left-1:right+1]
+                if ans[1]-ans[0] > right - left:
+                    ans = [left, right+1]
+                freq[s[left]] += 1
+                left += 1
+                chars_rem += 1
             right += 1
-        return ans
+        return s[ans[0]:ans[1]] if ans[1] != float("inf") else ""
