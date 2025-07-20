@@ -14,21 +14,30 @@ class Solution:
         return rev
 
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        res = dummy = last_div = ListNode(0)
-        last_div.next = head 
-        cnt = 0
-        while head:
-            cnt += 1
-            if cnt%k == 0:
-                temp = head.next
-                head.next = None
-                last_div.next = self.reverse(last_div.next)
-                dummy.next = last_div.next
-                while last_div.next:
-                    last_div = last_div.next
-                    dummy = dummy.next
-                last_div.next = temp
-                head = temp
-            else : head = head.next
-        dummy.next = last_div.next
-        return res.next
+        dummy = ListNode(0)
+        dummy.next = head
+        prev_group_tail = dummy
+        curr = head
+        count = 0
+
+        while curr:
+            count += 1
+            if count % k == 0:
+                group_start = prev_group_tail.next
+                next_group_head = curr.next
+                curr.next = None  # Temporarily break the group
+
+                # Reverse the current k-group
+                reversed_head = self.reverse(group_start)
+
+                # Reconnect with the previous part
+                prev_group_tail.next = reversed_head
+                group_start.next = next_group_head  # group_start is new tail
+
+                # Move to the next group
+                prev_group_tail = group_start
+                curr = next_group_head
+            else:
+                curr = curr.next
+
+        return dummy.next
