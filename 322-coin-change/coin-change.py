@@ -1,10 +1,10 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [10**4+1]*(amount + 1)
-        dp[0] = 0
-        for x in range(1,amount+1):
-            for coin in coins:
-                if x>= coin:
-                    dp[x] = min(dp[x], dp[x-coin]+1)
-        return dp[-1] if dp[-1] != 10**4 + 1 else -1
+        prev = [float("inf")]*(amount+1)
+        prev[0] = 0
+        for coin in coins:
+            if coin > amount: continue
+            for change in range(coin,amount+1):
+                prev[change] = min(prev[change-coin]+1,prev[change])
+        return prev[-1] if prev[-1] != float("inf") else -1
         
