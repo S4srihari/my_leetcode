@@ -1,23 +1,16 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         n = len(prices)
-        cache = [[None]*(n+1) for _ in range(2)]
+        dp = [[0] * 2 for _ in range(n + 1)]  
 
-        def mp(can_buy,cur):
-            if cur >= n:
-                return 0
-
-            if cache[can_buy][cur] is not None:
-                return cache[can_buy][cur]
-            elif can_buy == 1:
-                buy = mp(0,cur+1)-prices[cur]
-                not_buy = mp(1,cur+1)
-                cache[can_buy][cur] = max(buy,not_buy)
-                return cache[can_buy][cur]
-            else :
-                sell = mp(1,cur+2)+prices[cur]
-                not_sell = mp(0,cur+1)
-                cache[can_buy][cur] = max(sell,not_sell)
-                return cache[can_buy][cur]
-        mp(1,0)
-        return cache[1][0]
+        for i in range(n-1,-1,-1):
+            for buying in [1,0]:
+                if buying:
+                    buy = dp[i + 1][not buying] - prices[i] if i+1 < n else - prices[i]
+                    not_buy  = dp[i + 1][buying]  if i+1 < n else 0
+                    dp[i][1] = max(buy, not_buy)
+                else:
+                    sell = dp[i + 2][not buying] + prices[i]  if i+2 < n else  prices[i]
+                    not_sell = dp[i + 1][buying]  if i+1 < n else 0
+                    dp[i][0] = max(sell, not_sell)
+        return dp[0][1]
