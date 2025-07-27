@@ -1,10 +1,10 @@
 class Solution:
     def subset_sum(self,target, arr):
         prev = [True] + [False]*(target)
+        cur =  [True] + [False]*(target)
         if arr[0] <= target:
             prev[arr[0]] = True 
         for idx in range(1,len(arr)):
-            cur =  [True] + [False]*(target)
             for t in range(target+1):
                 not_take = prev[t]
                 take = False
@@ -13,7 +13,7 @@ class Solution:
                 cur[t] = take or not_take 
                 if cur[target] == True:
                     return True
-            prev = cur
+            prev,cur = cur,prev
 
         return prev[target] 
 
