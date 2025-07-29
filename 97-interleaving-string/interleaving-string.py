@@ -4,22 +4,31 @@ class Solution:
         if len(s3) != m+n:
             return False
         
-        dp = [[None]*(n+1) for _ in range(m+1)]
+        dp = [[False]*(n+1) for _ in range(m+1)]
+        dp[m][n] = True
+
+        for i in range(m,-1,-1):
+            for j in range(n,-1,-1):
+                if i < m and s1[i] == s3[i+j] and dp[i+1][j]: 
+                    dp[i][j] = True
+                if j < n and s2[j] == s3[i+j] and dp[i][j+1]: 
+                    dp[i][j] = True
+        
+        return dp[0][0]
+
         
         def helper(i,j):
             if i == m and j == n:
                 dp[i][j] = True
                 return True
             if dp[i][j] is not None: return dp[i][j]
-            if i < m and s1[i] == s3[i+j]:
-                if helper(i+1,j): 
-                    dp[i][j] = True
-                    return True
-            if j < n and s2[j] == s3[i+j]:
-                if helper(i,j+1): 
-                    dp[i][j] = True
-                    return True
+            if i < m and s1[i] == s3[i+j] and helper(i+1,j): 
+                dp[i][j] = True
+                return True
+            if j < n and s2[j] == s3[i+j] and helper(i,j+1): 
+                dp[i][j] = True
+                return True
             dp[i][j] = False
             return False
         
-        return helper(0,0)
+        #return helper(0,0)
