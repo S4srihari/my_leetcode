@@ -27,11 +27,10 @@ class Solution:
         dp = [[False]*(n+1) for _ in range(m+1)]
         
         dp[m][n] = True
-        for j in range(n-1,-1,-1):
-            if p[j] == "*":
-                dp[m][j] = dp[m][j+1]
-            else :
-                dp[m][j] = False
+        j = n-1
+        while j > -1 and p[j] == "*":
+            dp[m][j] = True
+            j -=1 
 
         for i in range(m-1,-1,-1):
             for j in range(n-1,-1,-1):
