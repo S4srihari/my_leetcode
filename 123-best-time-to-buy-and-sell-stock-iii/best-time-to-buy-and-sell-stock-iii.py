@@ -18,13 +18,9 @@ class Solution:
             return 0
         prev  = [[0]*2 for _ in range(3)]
         cur = [[0]*2 for _ in range(3)]
-        for j in range(2):
-            prev[0][j] = 0
-            cur[0][j] = 0
         
         for idx in range(n-1,-1,-1):
-            for can_buy in range(2):
-                cur[0][can_buy] = 0
+            cur[0][0], cur[0][1] = 0,0
             for lim in range(1,3):
                 for can_buy in range(2):
                     if can_buy :
