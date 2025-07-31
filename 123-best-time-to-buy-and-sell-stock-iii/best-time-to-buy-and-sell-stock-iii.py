@@ -25,13 +25,10 @@ class Solution:
                 dp[i][0][j] = 0
         
         for idx in range(n-1,-1,-1):
-            for lim in range(3):
+            for lim in range(1,3):
                 for can_buy in range(2):
                     if can_buy :
                         dp[idx][lim][can_buy] = max(dp[idx+1][lim][0] - prices[idx], dp[idx+1][lim][1])
                     else:
-                        if lim > 0:
-                            dp[idx][lim][can_buy] = max(dp[idx+1][lim-1][1]+prices[idx],dp[idx+1][lim][0])
-                        else :
-                            dp[idx][lim][can_buy] = dp[idx+1][lim][0]
+                        dp[idx][lim][can_buy] = max(dp[idx+1][lim-1][1]+prices[idx],dp[idx+1][lim][0])
         return dp[0][2][1]
