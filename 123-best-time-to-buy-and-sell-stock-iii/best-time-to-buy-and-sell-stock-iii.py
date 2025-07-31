@@ -16,5 +16,22 @@ class Solution:
         n = len(prices)
         if n < 2:
             return 0
-        dp = [[[None]*2 for _ in range(3)] for _ in range(n)]
-        return self.profit(0,1,prices,2,n,dp)
+        dp = [[[None]*2 for _ in range(3)] for _ in range(n+1)]
+        for i in range(3):
+            for j in range(2):
+                dp[n][i][j] = 0
+        for i in range(n+1):
+            for j in range(2):
+                dp[i][0][j] = 0
+        
+        for idx in range(n-1,-1,-1):
+            for lim in range(3):
+                for can_buy in range(2):
+                    if can_buy :
+                        dp[idx][lim][can_buy] = max(dp[idx+1][lim][0] - prices[idx], dp[idx+1][lim][1])
+                    else:
+                        if lim > 0:
+                            dp[idx][lim][can_buy] = max(dp[idx+1][lim-1][1]+prices[idx],dp[idx+1][lim][0])
+                        else :
+                            dp[idx][lim][can_buy] = dp[idx+1][lim][0]
+        return dp[0][2][1]
