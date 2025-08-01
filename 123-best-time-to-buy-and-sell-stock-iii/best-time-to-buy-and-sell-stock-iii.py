@@ -20,7 +20,6 @@ class Solution:
         cur = [[0]*2 for _ in range(3)]
         
         for idx in range(n-1,-1,-1):
-            cur[0][0], cur[0][1] = 0,0
             for lim in range(1,3):
                 for can_buy in range(2):
                     if can_buy :
