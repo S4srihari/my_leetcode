@@ -14,13 +14,13 @@ class Solution:
         n = len(prices)
         if n<2:
             return 0
-        dp = [[-1]*2 for _ in range(n+1)]
-        dp[n][0],dp[n][1] = 0,0
+        prev = [0]*2 
+        cur = [0]*2
         for idx in range(n-1,-1,-1):
             for can_buy in range(2):
                 if can_buy :
-                    dp[idx][can_buy] = max(dp[idx+1][can_buy],dp[idx+1][0]-prices[idx])
+                    cur[can_buy] = max(prev[can_buy],prev[0]-prices[idx])
                 else:
-                    dp[idx][can_buy] = max(dp[idx+1][can_buy],dp[idx+1][1]+prices[idx])
-
-        return dp[0][1]
+                    cur[can_buy] = max(prev[can_buy],prev[1]+prices[idx])
+            prev,cur = cur,prev
+        return prev[1]
