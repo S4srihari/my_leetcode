@@ -16,8 +16,10 @@ class Solution:
         n = len(arr)
         dp = [[float("-inf")]*(n+1) for _ in range(n+1)]
         dp[n][n] = 0
-        for start in range(n-k,n):
-            dp[n][start] =  max(arr[start:n])*(n-start)
+        cur_max = float("-inf")
+        for start in range(n-1,n-k-1):
+            cur_max = max(cur_max,arr[start])
+            dp[n][start] =  cur_max*(n-start)
 
         for idx in range(n-1,-1,-1):
             cur_max = float("-inf")
