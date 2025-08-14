@@ -1,15 +1,16 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        output = []
-        n = len(nums)
+        res = []
 
-        def recurse(first, curr, nums):
-            output.append(curr[:])
-            for i in range(first,n):
-                curr.append(nums[i])
-                recurse(i+1, curr, nums)
-                curr.pop()
+        def backtrack(i,cur):
+            if i >= len(nums):
+                res.append(cur[:])
+                return
+            cur.append(nums[i])
+            backtrack(i+1,cur)
+            cur.pop()
+            backtrack(i+1,cur)
             return
         
-        recurse(0,[],nums)
-        return output
+        backtrack(0,[])
+        return res
