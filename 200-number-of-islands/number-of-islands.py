@@ -1,31 +1,21 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        m = len(grid)
-        n = len(grid[0])
-        visited = set()
-
-        def bfs(r,c):
-            q = deque([(r,c)])
-            visited.add((r,c))
-            while q:
-                cr,cc = q.popleft()
-                if cc+ 1 < n and grid[cr][cc+1]=="1" and (cr,cc+1) not in visited:
-                    q.append((cr,cc+1))
-                    visited.add((cr,cc+1))
-                if cc - 1 >= 0 and grid[cr][cc-1]=="1" and (cr,cc-1) not in visited:
-                    q.append((cr,cc-1))
-                    visited.add((cr,cc-1))
-                if cr+1 < m and grid[cr+1][cc] == "1" and (cr+1,cc) not in visited:
-                    q.append((cr+1,cc))
-                    visited.add((cr+1,cc))
-                if cr-1 >= 0 and grid[cr-1][cc] == "1" and (cr-1,cc) not in visited:
-                    q.append((cr-1,cc))
-                    visited.add((cr-1,cc))
-        
+        m,n = len(grid), len(grid[0])
         islands = 0
+        vis = [[False]*n for _ in range(m)]
+
+        def dfs(i,j):
+            directions = [(1,0),(-1,0),(0,1),(0,-1)]
+            for di,dj in directions:
+                if 0<= i+di < m and 0<= j +dj < n and not vis[i+di][j+dj] and grid[i+di][j+dj] == "1":
+                    vis[i+di][j+dj] = True
+                    dfs(i+di,j+dj)
+
+
         for i in range(m):
             for j in range(n):
-                if grid[i][j] == "1" and (i,j) not in visited:
+                if grid[i][j] == "1" and not vis[i][j]:
+                    vis[i][j] = True
                     islands += 1
-                    bfs(i,j)
+                    dfs(i,j)
         return islands
