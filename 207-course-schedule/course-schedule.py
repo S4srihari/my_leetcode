@@ -30,7 +30,7 @@ class Solution:
                 dfs(i,[])
             if course_com[i] == False:
                 return False
-        return True"""
+        return True
 
         adj_lis = defaultdict(list)
         for c,p in prerequisites :
@@ -56,4 +56,25 @@ class Solution:
         for course in range(numCourses):
             if course not in visited and not dfs(course,path):
                 return False
-        return True
+        return True"""
+
+        adjList = defaultdict(list)
+        inDegree = [0]*numCourses
+        for end,st in prerequisites:
+            inDegree[end] += 1
+            adjList[st].append(end)
+        
+        topoOrder = []
+        que = deque([])
+        for course in range(numCourses):
+            if inDegree[course] == 0: que.append(course)
+        
+        while que:
+            course = que.popleft()
+            topoOrder.append(course)
+            for adjCourse in adjList[course]:
+                inDegree[adjCourse] -= 1
+                if inDegree[adjCourse] == 0:
+                    que.append(adjCourse)
+        
+        return len(topoOrder) == numCourses
