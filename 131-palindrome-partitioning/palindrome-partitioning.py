@@ -1,17 +1,22 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        pos_partitions = []
+        res = []
+        n = len(s)
 
-        def find(st, lis):
-            if not st:
-                pos_partitions.append(lis[:])
-            else :
-                for idx in range(len(st)):
-                    if st[:idx+1] == st[:idx+1][::-1]:
-                        lis.append(st[:idx+1])
-                        find(st[idx+1:],lis)
-                        lis.pop()
-            return
-        
-        find(s,[])
-        return pos_partitions
+        def palindrome(i,j):
+            while i < j:
+                if s[i] != s[j]:
+                    return False
+                i,j = i+1,j-1
+            return True
+
+        def backtrack(idx,cur):
+            if idx == n:
+                res.append(cur[:])
+            for i in range(idx,n):
+                if palindrome(idx,i):
+                    cur.append(s[idx:i+1])
+                    backtrack(i+1,cur)
+                    cur.pop()
+        backtrack(0,[])
+        return res
