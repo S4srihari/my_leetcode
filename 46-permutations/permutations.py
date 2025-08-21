@@ -1,18 +1,15 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        lis = []
-        def recurse(a,b):
-            if len(b) == 1:
-                a.append(b[0])
-                lis.append(a)
+        res = []
+
+        def backtrack(start):
+            if start == len(nums):
+                res.append(nums[:])
                 return
-            for i in range(len(b)):
-                left = a.copy()
-                right = b.copy()
-                left.append(b[i])
-                right.pop(i)
-                recurse(left,right)
-            return 
-        recurse([],nums)
-        return lis
-                
+            for i in range(start, len(nums)):
+                nums[start], nums[i] = nums[i], nums[start]  # swap
+                backtrack(start + 1)
+                nums[start], nums[i] = nums[i], nums[start]  # backtrack
+
+        backtrack(0)
+        return res
