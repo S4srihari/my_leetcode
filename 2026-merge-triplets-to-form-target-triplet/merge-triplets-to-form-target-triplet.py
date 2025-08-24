@@ -6,4 +6,5 @@ class Solution:
                 continue
             for i in range(3):
                 if triplet[i] == target[i]: check[i] = True
-        return all(check)
+            if all(check): return True
+        return False
