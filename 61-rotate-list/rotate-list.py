@@ -18,10 +18,8 @@ class Solution:
         while fast.next:
             fast = fast.next
             slow = slow.next
-        if slow.next: 
-            ans = slow.next
-        else:
-            ans = head
+        
+        ans = slow.next
         fast.next = head
         slow.next = None
         return ans
