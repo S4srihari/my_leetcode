@@ -5,12 +5,12 @@ class Solution:
             if ch in "aeiouAEIOU" :
                 vowels.append(ch)
         vowels.sort()
-        res = []
+        res = ""
         idx = 0
         for ch in s:
             if ch not in "aeiouAEIOU":
-                res.append(ch)
+                res += ch
             else:
-                res.append(vowels[idx])
+                res += vowels[idx]
                 idx += 1
-        return "".join(res)
+        return res
