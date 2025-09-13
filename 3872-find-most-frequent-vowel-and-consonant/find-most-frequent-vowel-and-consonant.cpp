@@ -13,10 +13,7 @@ public:
             }
             freq[i] = 0;
         }
-        int maxCons = 0;
-        for(int i : freq){
-            if (i > maxCons) maxCons = i; 
-        }
+        int maxCons = *max_element(freq,freq+26);
         return maxVowel + maxCons;
     }
 };
