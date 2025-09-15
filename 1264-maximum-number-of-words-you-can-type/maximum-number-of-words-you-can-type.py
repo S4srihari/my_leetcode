@@ -3,8 +3,10 @@ class Solution:
         words = text.split()
         res = 0
         for word in words:
-            if any([c in word for c in brokenLetters]):
-                continue
-            else:
-                res += 1
+            found = False
+            for c in brokenLetters:
+                if c in set(word):
+                    found = True
+                    break
+            res += 1 if not found else 0
         return res
