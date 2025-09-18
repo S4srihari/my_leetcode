@@ -27,8 +27,9 @@ class TaskManager:
             pr, tId = heapq.heappop(self.taskHeap)
             pr, tId = -pr, -tId
             if self.priorityHash[tId] == pr and self.userHash[tId] != -1:
-                self.priorityHash[tId] = -1
-                return self.userHash[tId] 
+                ans = self.userHash[tId]
+                self.userHash[tId] = -1
+                return ans
         return -1
 
 # Your TaskManager object will be instantiated and called as such:
