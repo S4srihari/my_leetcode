@@ -3,14 +3,9 @@ public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
         unordered_map<string,vector<string>> hash;
         for (string str : strs ){
-            vector<int> freq(26,0);
-            for (char c : str){ freq[c-'a']++;}
-            string key = to_string(freq[0]);
-            for (int i = 1; i < 26; i++){
-                key.append(" ");
-                key.append(to_string(freq[i]));
-            }
-            hash[key].push_back(str);
+            string anag = str;
+            sort(str.begin(),str.end());
+            hash[str].push_back(anag);
         }
         vector<vector<string>> res;
         for (auto pair : hash){
