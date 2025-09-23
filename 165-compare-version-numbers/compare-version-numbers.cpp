@@ -1,28 +1,17 @@
 class Solution {
 public:
     int compareVersion(string version1, string version2) {
-        vector<int> v1,v2;
-        stringstream ss1(version1), ss2(version2);
-        string s;
-        while(getline(ss1,s,'.')){
-            v1.push_back(stoi(s));
-        }
-        while(getline(ss2,s,'.')){
-            v2.push_back(stoi(s));
-        }
-        int idx = 0, l1 =  v1.size(), l2 = v2.size();
-        while(idx < l1 && idx < l2){
-            if( v1[idx] > v2[idx]) return 1;
-            else if (v1[idx] < v2[idx]) return -1;
-            idx++;
-        }
-        while(idx < l1){
-            if( v1[idx] > 0) return 1;
-            idx++;
-        }
-        while(idx < l2){
-            if (v2[idx] > 0) return -1;
-            idx++;
+        stringstream s1(version1), s2(version2);
+        string token1, token2;
+        
+        while (s1.good() || s2.good()){
+            if(!getline(s1, token1, '.')) token1 = "0";
+            if(!getline(s2, token2, '.')) token2 = "0";
+            int num1 = stoi(token1);
+            int num2 = stoi(token2);
+            if (num1 < num2) return -1;
+            if (num1 > num2) return 1;
+            token1.clear(); token2.clear();
         }
         return 0;
     }
