@@ -9,9 +9,11 @@ class Solution:
 
     def minimumTotal(self, triangle: List[List[int]]) -> int:
         n = len(triangle)
-        cache = [[0]*(n+1) for _ in range(n+1)]
+        ahead = [0]*(n+1)
+        cur = [0]*(n+1)
 
         for i in range(n-1,-1,-1):
             for j in range(i,-1,-1):
-                cache[i][j] = min(cache[i+1][j],cache[i+1][j+1]) + triangle[i][j]
-        return cache[0][0]
+                cur[j] = min(ahead[j],ahead[j+1]) + triangle[i][j]
+            cur,ahead = ahead,cur
+        return ahead[0]
