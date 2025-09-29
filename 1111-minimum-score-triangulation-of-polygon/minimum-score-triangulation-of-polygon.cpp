@@ -1,7 +1,8 @@
 class Solution {
 public:
     int dp[50][50] = {};
-    int mst(vector<int>& values, int i=0, int j=0, int res=0){
+    int mst(vector<int>& values, int i=0, int j=0){
+        int res = 0;
         if (j == 0) j = values.size() - 1;
         if (dp[i][j] != 0) return dp[i][j];
         for (int k = i + 1; k < j; ++k) {
