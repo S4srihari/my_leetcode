@@ -1,34 +1,28 @@
 class Solution:
     def trapRainWater(self, heightMap: List[List[int]]) -> int:
-        if not heightMap: return 0
-        m = len(heightMap)
-        n = len(heightMap[0])
-        water = 0
-        que = deque([])
+        if not heightMap or not heightMap[0]:
+            return 0
+
+        m, n = len(heightMap), len(heightMap[0])
+        visited = [[False] * n for _ in range(m)]
         heap = []
-        visited = [[False]*n for _ in range(m)]
+
         for i in range(m):
-            if i == 0 or i == m-1:
-                for j in range(n):
-                    heap.append((heightMap[i][j], i, j))
-            else:
-                heap.append((heightMap[i][0], i, 0))
-                heap.append((heightMap[i][n-1], i, n-1))
-        heapq.heapify(heap)
-        dirs = [0,1,0,-1,0]
+            for j in range(n):
+                if i == 0 or i == m - 1 or j == 0 or j == n - 1:
+                    heapq.heappush(heap, (heightMap[i][j], i, j))
+                    visited[i][j] = True
+
+        trapped = 0
+        directions = [(0,1),(0,-1),(1,0),(-1,0)]
+
         while heap:
-            height,i,j = heapq.heappop(heap)
-            que.append((height,i,j))
-            while que:
-                height,x,y = que.popleft()
-                visited[x][y] = True
-                for d in range(4):
-                    if x+dirs[d]>=0 and x+dirs[d]<m and y+dirs[d+1]>=0 and y+dirs[d+1]<n and not visited[x+dirs[d]][y+dirs[d+1]]:
-                        if heightMap[x+dirs[d]][y+dirs[d+1]] < height:
-                            water += height - heightMap[x+dirs[d]][y+dirs[d+1]] 
-                            heightMap[x+dirs[d]][y+dirs[d+1]] = height
-                            que.append((height,x+dirs[d],y+dirs[d+1]))
-                            visited[x+dirs[d]][y+dirs[d+1]] = True
-                        else:
-                            heapq.heappush(heap, (heightMap[x+dirs[d]][y+dirs[d+1]], x+dirs[d], y+dirs[d+1]))
-        return water
+            height, x, y = heapq.heappop(heap)
+            for dx, dy in directions:
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < m and 0 <= ny < n and not visited[nx][ny]:
+                    visited[nx][ny] = True
+                    trapped += max(0, height - heightMap[nx][ny])
+                    heapq.heappush(heap, (max(height, heightMap[nx][ny]), nx, ny))
+
+        return trapped
