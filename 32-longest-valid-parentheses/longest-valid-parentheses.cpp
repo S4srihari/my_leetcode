@@ -10,7 +10,7 @@ public:
             }
             else {
                 st.pop();
-                if (st.size() == 0) st.push(i);
+                if (st.empty()) st.push(i);
                 else res = max(res, i-st.top());
             }
         }
