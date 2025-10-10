@@ -1,24 +1,21 @@
 class Solution {
 public:
-    int helper(int i, vector<int>& energy, int k){
-        if (i<0) return 0;
-        int prev = helper(i-k, energy, k);
-        if (prev > 0) return energy[i] + prev;
-        else return energy[i];
-    }
-
     int maximumEnergy(vector<int>& energy, int k) {
         int n = energy.size();
-        int val, res = INT_MIN;
-        for (int i= n-1; i>n-1-k; i--){
-            if (i >= 0){
-                val = helper(i, energy, k);
+        vector<int> dp(energy.size(),-1);
+        int ans=INT_MIN;
+        for(int i=energy.size()-1;i>=0;i--)
+        {
+            if(i+k<energy.size())
+            {
+                dp[i]=energy[i]+dp[i+k];
             }
-            else{
-                break;
+            else
+            {
+                dp[i]=energy[i];
             }
-            res = std::max(res, val);
+            ans=max(ans,dp[i]);
         }
-        return res;
+        return ans;
     }
 };
