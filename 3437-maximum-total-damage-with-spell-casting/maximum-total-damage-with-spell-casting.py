@@ -1,14 +1,4 @@
-class Solution:
-    def helper(self, idx, arr, prev, n, dp):
-        if idx < 0: return 0
-        if dp[idx][prev] != -1: return dp[idx][prev]
-        not_take = self.helper(idx-1,arr, prev, n, dp)
-        take = -1
-        if prev == n or arr[prev][0] - arr[idx][0] > 2:
-            take = arr[idx][1] + self.helper(idx-1,arr,idx,n, dp)
-        dp[idx][prev] = max(take,not_take)
-        return dp[idx][prev]
-        
+class Solution:    
     def maximumTotalDamage(self, power: List[int]) -> int:
         c = Counter(power)
         arr =  sorted(c.keys())
