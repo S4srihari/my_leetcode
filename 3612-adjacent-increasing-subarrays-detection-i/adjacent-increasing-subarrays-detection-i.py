@@ -3,7 +3,7 @@ class Solution:
         for i in range(len(nums)-k-k+1):
             valid = True
             for j in range(i+1,i+k):
-                if j != 0 and nums[j] <= nums[j-1]:
+                if nums[j] <= nums[j-1]:
                     valid = False
                     break
             if not valid: continue
