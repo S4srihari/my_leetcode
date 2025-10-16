@@ -3,15 +3,14 @@ class Solution:
         n = len(nums)
         store = [0]*value
         for i in nums:
-            if i >= 0:
-                store[i%value] += 1
-            else:
-                store[(value-(abs(i)%value))%value] += 1
-        res = 0
-        while True:
-            if not store[res%value]:
-                break
-            else:
-                store[res%value] -= 1
-                res += 1
-        return res
+            store[i%value] += 1
+
+        min_freq = float('inf')
+        min_idx = -1
+        
+        for i in range(value):
+            if store[i] < min_freq:
+                min_freq = store[i]
+                min_idx = i
+        
+        return min_freq * value + min_idx
