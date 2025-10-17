@@ -6,6 +6,6 @@ class Solution:
         for c in t:
             arr[ord(c)-ord('a')] -= 1
         res = 0
-        for i in arr:
-            res += abs(i)
+        for i in range(26):
+            res += abs(arr[i])
         return res
