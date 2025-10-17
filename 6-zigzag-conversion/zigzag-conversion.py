@@ -1,27 +1,20 @@
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
-        n = len(s)
-        res = [[] for _ in range(numRows)]
-        i,j = 0,0
-        while i<n:
-            while i<n and j < numRows-1:
-                res[j].append(s[i])
-                i += 1
-                j += 1
-            if i == n: break
-            res[j].append(s[i])
-            i += 1
-            j -= 1
-            while i<n and j > 0:
-                res[j].append(s[i])
-                i += 1
-                j -= 1
-            if i == n: break
-            res[j].append(s[i])
-            i += 1
-            j += 1
-            
-        ans = ""
-        for i in range(numRows):
-            ans += "".join(res[i])
-        return ans
+        if numRows == 1 or numRows >= len(s):
+            return s
+
+        row = 0
+        step = 1
+        arr = [''] * numRows
+
+        for c in s:
+            arr[row] += c
+
+            if row == 0:
+                step = 1
+            elif row == numRows-1:
+                step = -1
+
+            row += step
+
+        return ''.join(arr)
