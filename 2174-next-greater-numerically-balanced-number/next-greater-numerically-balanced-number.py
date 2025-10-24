@@ -1,20 +1,26 @@
+all_perms = []
+for i in range(1, 8):
+    curr_list = [i]*i
+    curr_perms = list(set(permutations(curr_list)))
+    all_perms.extend(curr_perms)
+    if i == 1:
+        curr_list = [1, 2, 2, 3, 3, 3]
+        curr_perms = list(set(permutations(curr_list)))
+        all_perms.extend(curr_perms)
+        curr_list = [1, 2, 2, 4,4,4,4]
+        curr_perms = list(set(permutations(curr_list)))
+        all_perms.extend(curr_perms)
+    for j in range(1, i//2+1):
+        a, b = j, i-j
+        if a == b:
+            break
+        curr_list = [a]*a + [b]*b
+        curr_perms = list(set(permutations(curr_list)))
+        all_perms.extend(curr_perms)
+all_perms = [int(''.join(str(a) for a in num)) for num in all_perms]
+all_perms.sort()
+
 class Solution:
     def nextBeautifulNumber(self, n: int) -> int:
-        st = set()
-        def dfs(i,selected):
-            if i==8:
-                if not selected:
-                    return
-                s="".join(str(i)*i for i in selected)
-                if len(s)<=7:
-                    for i in set(permutations(s)):
-                        st.add(int("".join(i)))
-                else:
-                    st.add(int(s))
-                return
-            dfs(i+1,selected)
-            dfs(i+1,selected+[i])
-        dfs(1,[])
-        st = sorted(st)
-        idx = bisect_right(st,n)
-        return st[idx]
+        for num in all_perms:
+            if num > n: return num
