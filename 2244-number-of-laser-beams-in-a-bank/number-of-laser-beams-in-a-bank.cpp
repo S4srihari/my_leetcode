@@ -2,9 +2,9 @@ class Solution {
 public:
     int numberOfBeams(vector<string>& bank) {
         int beams = 0, prevs = 0, lasers;
-        for (string row : bank){
+        for (int i=0; i<bank.size(); i++){
             lasers = 0;
-            for (char c : row){
+            for (char c : bank[i]){
                 if (c == '1') lasers++;
             }
             if (lasers > 0){
