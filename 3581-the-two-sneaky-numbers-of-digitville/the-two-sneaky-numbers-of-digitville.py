@@ -13,8 +13,5 @@ class Solution:
                     nums[abs(nums[i])] *= -1
                 else:
                     zeroVisited.add(abs(nums[i]))
-            
-            if cnt == 0:
-                break
 
         return res + [0]*cnt
