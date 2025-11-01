@@ -6,13 +6,17 @@
 class Solution:
     def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
         store = set(nums)
-        tmp = ListNode(0)
-        while head.val in store:
+        while head and head.val in store:
             head = head.next
-        res = tmp
-        while head:
-            if head.val not in store:
-                tmp.next = ListNode(head.val)
-                tmp = tmp.next
+        prev = head
+        res = head
+        if head.next:
             head = head.next
-        return res.next
+            while head:
+                if head.val not in store:
+                    prev.next = head
+                    prev = prev.next
+                head = head.next
+            if prev.next and prev.next.val in store:
+                prev.next = None
+        return res
