@@ -18,5 +18,24 @@ class Solution:
 
     def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
         if not strs: return 0
-        dp = [[[-1]*(n+1) for _ in range(m+1)] for _ in range(len(strs))]
-        return self.solve(len(strs)-1,strs,m,n,dp)
+        l = len(strs)
+        dp = [[[0]*(n+1) for _ in range(m+1)] for _ in range(l)]
+        x = strs[0].count('0')
+        y = strs[0].count('1')
+        for zeroCnt in range(m+1):
+            for oneCnt in range(n+1):
+                if zeroCnt >= x and oneCnt >= y:
+                    dp[0][zeroCnt][oneCnt] = 1
+
+        for idx in range(1,l):
+            x = strs[idx].count('0')
+            y = strs[idx].count('1')
+            for zeroCnt in range(m+1):
+                for oneCnt in range(n+1):
+                    pick = 0
+                    if  x <= zeroCnt and y <= oneCnt:
+                        pick = 1 + dp[idx-1][zeroCnt-x][oneCnt-y]
+                    notPick = dp[idx-1][zeroCnt][oneCnt]
+                    dp[idx][zeroCnt][oneCnt] = max(pick,notPick)
+
+        return dp[l-1][m][n]
