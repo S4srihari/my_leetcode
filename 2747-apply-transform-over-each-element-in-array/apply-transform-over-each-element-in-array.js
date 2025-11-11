@@ -5,9 +5,10 @@
  */
 var map = function(arr, fn) {
     const res = [];
-    const len = arr.length;
-    for (let idx =0; idx < len; idx++) {
-        res[idx] = fn(arr[idx], idx);
+    let idx =0;
+    for (const num in arr) {
+        res.push(fn(arr[idx], idx));
+        idx++;
         }
     return res;
 };
