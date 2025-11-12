@@ -22,9 +22,8 @@ class Solution:
         dp = [[[0]*(n+1) for _ in range(m+1)] for _ in range(l)]
         x = strs[0].count('0')
         y = strs[0].count('1')
-        for zeroCnt in range(m+1):
-            for oneCnt in range(n+1):
-                if zeroCnt >= x and oneCnt >= y:
+        for zeroCnt in range(x,m+1):
+            for oneCnt in range(y,n+1):
                     dp[0][zeroCnt][oneCnt] = 1
 
         for idx in range(1,l):
