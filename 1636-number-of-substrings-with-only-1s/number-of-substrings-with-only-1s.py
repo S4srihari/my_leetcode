@@ -20,5 +20,6 @@ class Solution:
         if n > 1 and s[n-1] == '1':
             k = n-st
             res += k*(k+1)//2
+            res %= mod
         return res
                 
