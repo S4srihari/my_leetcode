@@ -1,17 +1,14 @@
 class Solution:
     def countPalindromicSubsequence(self, s: str) -> int:
-        startSet = set()
-        n = len(s)
+        first = [-1]*26
+        last = [-1]*26
+        for i, ch in enumerate(s):
+            idx = ord(ch)-ord('a')
+            if first[idx] == -1: first[idx] = i
+            else: last[idx] = i
+        
         res = 0
-        for i in range(n-2):
-            if s[i] in startSet:
-                continue
-            middleSet = set()
-            temp = 0
-            for j in range(i+1,n):
-                if s[j] == s[i] and j > i+1:
-                    temp = len(middleSet)
-                    startSet.add(s[i])
-                middleSet.add(s[j])
-            res += temp
+        for i in range(26):
+            if last[i] - first[i] > 1:
+                res += len(set([ch for ch in s[first[i]+1:last[i]]]))
         return res
