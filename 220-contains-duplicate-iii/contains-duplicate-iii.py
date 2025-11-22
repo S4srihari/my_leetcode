@@ -1,11 +1,16 @@
 class Solution:
     def containsNearbyAlmostDuplicate(self, nums: List[int], indexDiff: int, valueDiff: int) -> bool:
-        s = SortedList()
-        for i in range(len(nums)):
-            if i >= indexDiff+1:
-                s.remove(nums[i-indexDiff-1])
-            if s and bisect_left(s, nums[i]-valueDiff) != bisect_right(s, nums[i]+valueDiff):
+        buckets = {}
+        for i, n in enumerate(nums):
+            bucket_idx = n // valueDiff if valueDiff != 0 else n
+            if bucket_idx in buckets:
                 return True
-            s.add(nums[i])
+            if (bucket_idx - 1) in buckets and n - buckets[bucket_idx - 1] <= valueDiff:
+                return True
+            if (bucket_idx + 1) in buckets and buckets[bucket_idx + 1] - n <= valueDiff:
+                return True
+            buckets[bucket_idx] = n
+            if i >= indexDiff:
+                expired =  nums[i-indexDiff] // valueDiff if valueDiff != 0 else nums[i-indexDiff]
+                del buckets[expired]
         return False
-
