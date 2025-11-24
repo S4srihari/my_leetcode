@@ -9,26 +9,26 @@ class Trie:
 
     def insert(self, word: str) -> None:
         node = self.root
-        for i in range(len(word)):
-            if not word[i] in  node.children:
-                node.children[word[i]] = Node()
-            node = node.children[word[i]]
+        for ch in word:
+            if not ch in  node.children:
+                node.children[ch] = Node()
+            node = node.children[ch]
         node.EoW = True
 
     def search(self, word: str) -> bool:
         node = self.root
-        for i in range(len(word)):
-            if not word[i] in node.children:
+        for ch in word:
+            if not ch in node.children:
                 return False
-            node = node.children[word[i]]
+            node = node.children[ch]
         return node.EoW
 
     def startsWith(self, prefix: str) -> bool:
         node = self.root
-        for i in range(len(prefix)):
-            if not prefix[i] in node.children:
+        for ch in prefix:
+            if not ch in node.children:
                 return False
-            node = node.children[prefix[i]]
+            node = node.children[ch]
         return True
         
 
