@@ -1,7 +1,8 @@
 class Solution:
     def maxSubarraySum(self, nums: List[int], k: int) -> int:
         res = -float("inf")
-        preSum = defaultdict(int)
+        preSum = {}
+        preSum[-1] = 0
         subSum = [None]*k
         curSum = 0
         for i in range(len(nums)):
@@ -13,6 +14,6 @@ class Solution:
                     newSum =  curSum - preSum[i-k]
                     subSum[idx] = max(subSum[idx] + newSum, newSum)
                 else:
-                    subSum[idx] = curSum - preSum[i-k] if i >= k else curSum
+                    subSum[idx] = curSum - preSum[i-k]
                 res = max(res, subSum[idx])
         return res
