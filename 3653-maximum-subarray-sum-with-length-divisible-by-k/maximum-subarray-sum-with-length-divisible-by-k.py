@@ -10,9 +10,8 @@ class Solution:
             if i >= k-1:
                 idx = (i+1)%k
                 if not subSum[idx] == None:
-                    appending = subSum[idx] + curSum - preSum[i-k]
-                    alone = curSum-preSum[i-k]
-                    subSum[idx] = max(appending, alone)
+                    newSum =  curSum - preSum[i-k]
+                    subSum[idx] = max(subSum[idx] + newSum, newSum)
                 else:
                     subSum[idx] = curSum - preSum[i-k] if i >= k else curSum
                 res = max(res, subSum[idx])
