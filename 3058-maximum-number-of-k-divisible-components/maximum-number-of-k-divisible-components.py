@@ -4,18 +4,16 @@ class Solution:
         for u,v in edges:
             adj_list[u].append(v)
             adj_list[v].append(u)
-        vis = set()
         comps = 1
-        def dfs(node):
+        def dfs(node,parent):
             nonlocal comps
-            vis.add(node)
             cur = values[node]
             for adj_node in adj_list[node]:
-                if adj_node not in vis:
-                    val = dfs(adj_node)
+                if adj_node != parent:
+                    val = dfs(adj_node, node)
                     if val%k == 0:
                         comps += 1
                     cur += val
             return cur
-        dfs(0)
+        dfs(0,-1)
         return comps
