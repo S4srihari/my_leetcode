@@ -6,7 +6,9 @@ class Solution:
             tot = 0
             for bat in batteries:
                 tot += min(bat, val)
-            return tot//n >= val
+                if tot//n >= val :
+                    return True
+            return False
         while left <= right:
             mid = left + (right-left)//2
             if possible(mid):
