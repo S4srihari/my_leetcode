@@ -4,15 +4,13 @@ class Solution:
         lines = defaultdict(int)
         for x,y in points:
             lines[y] += 1
-        cntlines = []
         tot = 0
-        for line in lines:
-            cords = lines[line]
-            sides = (cords*(cords-1))//2
-            tot += sides
-            if sides: cntlines.append(sides)
-        res = 0
-        for cnt in cntlines:
-            res += (tot-cnt)*cnt
+        sq_sum = 0
+        for cnt in lines.values():
+            if cnt>1: 
+                sides = (cnt*(cnt-1))//2
+                tot += sides
+                sq_sum += sides*sides
+        res = tot*tot - sq_sum
         res = res//2
         return res%mod
