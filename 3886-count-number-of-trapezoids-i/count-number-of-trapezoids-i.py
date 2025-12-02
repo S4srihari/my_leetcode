@@ -10,7 +10,7 @@ class Solution:
             cords = lines[line]
             sides = (cords*(cords-1))//2
             tot += sides
-            cntlines.append(sides)
+            if sides: cntlines.append(sides)
         res = 0
         for cnt in cntlines:
             res += (tot-cnt)*cnt
