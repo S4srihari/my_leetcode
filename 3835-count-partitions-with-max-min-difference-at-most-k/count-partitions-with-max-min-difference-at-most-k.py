@@ -2,8 +2,7 @@ class Solution:
     def countPartitions(self, nums: List[int], k: int) -> int:
         n = len(nums)
         MOD = 10**9 + 7
-        dp = [0] * (n + 1)
-        dp[0] = 1
+        dp =[1] + [0]*n
         prefix_dp = [0] * (n + 2)
         prefix_dp[1] = 1  
         min_q = deque() 
