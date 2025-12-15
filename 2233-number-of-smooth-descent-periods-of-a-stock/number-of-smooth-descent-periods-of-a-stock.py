@@ -8,8 +8,8 @@ class Solution:
         for right in range(1,n):
             if prices[right-1] - prices[right] != 1:
                 dist = right - left
-                res += int(dist*(dist+1)/2)
+                res += dist*(dist+1)//2
                 left = right
         dist = n-left
-        res += int(dist*(dist+1)/2)
+        res += dist*(dist+1)//2
         return res
