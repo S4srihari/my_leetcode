@@ -2,12 +2,12 @@ class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
         n = len(nums)
         for i in range(n):
-            if int(nums[i]) > 0 and int(nums[i]) <= n:
-                nums[int(nums[i])-1] = str(nums[int(nums[i])-1])
-        
-        res = 1
+            while 1 <= nums[i] <= n and nums[i] != nums[nums[i]-1]:
+                nums[nums[i]-1], nums[i] = nums[i], nums[nums[i]-1]
+
+        res = 1    
         for i in range(n):
-            if type(nums[i]) is str:
+            if nums[i] == i+1:
                 res += 1
             else:
                 break
