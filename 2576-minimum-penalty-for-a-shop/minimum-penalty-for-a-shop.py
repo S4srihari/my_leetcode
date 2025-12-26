@@ -6,9 +6,9 @@ class Solution:
         tot_hrs_with_cust = 0
         tot_hrs_without_cust = 0
         for i in range(n):
-            if i < n and customers[i] == "Y":
+            if customers[i] == "Y":
                 tot_hrs_with_cust += 1
-            elif i < n:
+            else:
                 tot_hrs_without_cust += 1
             prev_penalty[i+1] = tot_hrs_without_cust
 
