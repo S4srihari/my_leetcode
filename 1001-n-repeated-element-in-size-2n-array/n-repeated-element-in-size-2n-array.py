@@ -6,3 +6,6 @@ class Solution:
                 return num
             seen.add(num)
         return 0
+
+        # Tc = O(n)
+        # Sc = O(n)
