@@ -1,21 +1,25 @@
 class Solution:
     def minLength(self, nums: List[int], k: int) -> int:
+        # Brute Force
+        # Tc = O(n**2) 
+        # Using Sliding Window and HashMap
+
         n = len(nums)
-        mini = n + 1
-        left, right = 0,0
+        res = n+1
         cache = {}
-        cur = 0
+        curSum = 0
+        left = 0
         for right in range(n+1):
-            while cur >= k:
+            while curSum >= k:
                 cache[nums[left]] -= 1
                 if cache[nums[left]] == 0:
+                    curSum -= nums[left]
                     del cache[nums[left]]
-                    cur -= nums[left]
-                mini = min(mini, right-left)
+                res = min(res, right-left)
                 left += 1
             if right == n:
                 break
             cache[nums[right]] = cache.get(nums[right], 0) + 1
             if cache[nums[right]] == 1:
-                cur += nums[right]
-        return mini if mini < n + 1 else -1
+                curSum += nums[right]
+        return res if res <= n else -1
