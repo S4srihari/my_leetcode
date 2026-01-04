@@ -12,9 +12,16 @@ class Solution:
         return divisors
 
     def sumFourDivisors(self, nums: List[int]) -> int:
-        tot = 0
-        for num in nums:
-            divs = self.get_divisors(num)
-            if len(divs) == 4:
-                tot += sum(divs)
-        return tot
+        m = max(nums)
+        divs = [0 for i in range(m+1)]
+        sums = [0 for i in range(m+1)]
+        for i in range(1,m+1,1):
+            for j in range(i,m+1,i):
+                divs[j]+=1
+                sums[j]+=i
+        res = 0
+        for i in nums:
+            if divs[i] == 4:
+                res+=sums[i]
+        
+        return res
