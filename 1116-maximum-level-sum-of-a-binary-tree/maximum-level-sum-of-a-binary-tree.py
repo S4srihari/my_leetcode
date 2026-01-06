@@ -13,9 +13,8 @@ class Solution:
         que = deque([root])
         level =  1
         while que:
-            length = len(que)
             cur_level_sum = 0
-            for _ in range(length):
+            for _ in range(len(que)):
                 node = que.popleft()
                 cur_level_sum += node.val
                 if node.left:
