@@ -1,22 +1,20 @@
 class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        adj = defaultdict(list)
-        for u, v, w in times:
-            adj[u].append((v, w))
+        adj_list = defaultdict(list)
+        for start, end, weight in times:
+            adj_list[start].append((end, weight))
         
-        dist = [float("inf")] * (n + 1)
-        dist[k] = 0
-        heap = [(0, k)]  # (time, node)
+        reach_times = [float("inf")] * (n+1)
+        reach_times[k] = 0
+        heap = [(0, k)] 
         
         while heap:
-            curTime, node = heapq.heappop(heap)
-            if curTime > dist[node]:
-                continue
-            for nei, w in adj[node]:
-                if dist[node] + w < dist[nei]:
-                    dist[nei] = dist[node] + w
-                    heapq.heappush(heap, (dist[nei], nei))
+            cur_time, node = heapq.heappop(heap)
+            for adj_node, weight in adj_list[node]:
+                if cur_time + weight < reach_times[adj_node]:
+                    reach_times[adj_node] = cur_time + weight 
+                    heapq.heappush(heap, (reach_times[adj_node], adj_node))
         
-        res = max(dist[1:])
+        res = max(reach_times[1:])
         if res == float("inf"): return -1 
         return res
