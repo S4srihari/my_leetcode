@@ -6,17 +6,18 @@
 #         self.right = right
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        def check(node):
-            if not node:
-                return True, 0 
-            
-            left_balanced, left_height = check(node.left)
-            right_balanced, right_height = check(node.right)
-            
-            balanced = left_balanced and right_balanced and abs(left_height - right_height) <= 1
-            height = 1 + max(left_height, right_height)
-            
-            return balanced, height
         
-        result, _ = check(root)
-        return result
+        def solve(root):
+            if not root:
+                return (True, 0)
+            left = solve(root.left)
+            right = solve(root.right)
+            if not left[0] or not right[0]:
+                return (False, 0)
+            elif abs(left[1] - right[1]) > 1:
+                return (False, 0)
+            else:
+                return (True, max(left[1],right[1])+1)
+        
+        ans = solve(root)
+        return ans[0]
